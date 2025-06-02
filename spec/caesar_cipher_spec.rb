@@ -6,3 +6,6 @@ describe alphabet do
     expect(alphabet).to eq('abcdefghijklmnopqrstuvwxyz')
   end
 end
+
+describe alphabet do
+end
