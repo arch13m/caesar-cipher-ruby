@@ -9,7 +9,13 @@ def alpha_lower_arr
 end
 
 def alpha_upper_arr
-  alpha_lower_arr.upcase.split('')
+  alphabet.upcase.split('')
+end
+
+def sanitise_shift(shift)
+  shift = sanitise_shift(shift - 26) if shift > 25
+  shift = sanitise_shift(shift + 26) if shift.negative?
+  shift
 end
 
 def caesar_cipher(string, shift)
@@ -23,13 +29,11 @@ def caesar_cipher(string, shift)
   splitted.each do |i|
     if alpha_lower_arr.include?(i)
       idx = alpha_lower_arr.find_index(i)
-      new_idx = idx + shift
-      new_idx -= 26 if new_idx > 25
+      new_idx = sanitise_shift(idx + shift)
       shifted.push(alpha_lower_arr[new_idx])
     elsif alpha_upper_arr.include?(i)
       idx = alpha_upper_arr.find_index(i)
-      new_idx = idx + shift
-      new_idx -= 26 if new_idx > 25
+      new_idx = sanitise_shift(idx + shift)
       shifted.push(alpha_upper_arr[new_idx])
     else
       shifted.push(i)
